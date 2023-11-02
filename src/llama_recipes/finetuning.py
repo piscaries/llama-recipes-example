@@ -131,6 +131,7 @@ def main(**kwargs):
     if train_config.use_peft:
         peft_config = generate_peft_config(train_config, kwargs)
         model = get_peft_model(model, peft_config)
+        print("printing trainable parameters:")
         model.print_trainable_parameters()
 
     #setting up FSDP if enable_fsdp is enabled

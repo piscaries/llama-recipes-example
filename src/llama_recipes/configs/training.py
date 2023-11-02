@@ -10,9 +10,9 @@ class train_config:
     enable_fsdp: bool=False
     low_cpu_fsdp: bool=False
     run_validation: bool=True
-    batch_size_training: int=4
-    batching_strategy: str="packing" #alternative: padding
-    context_length: int=4096
+    batch_size_training: int=1
+    batching_strategy: str="padding" #alternative: padding
+    context_length: int=2048
     gradient_accumulation_steps: int=1
     num_epochs: int=3
     num_workers_dataloader: int=1
@@ -23,7 +23,7 @@ class train_config:
     use_fp16: bool=False
     mixed_precision: bool=True
     val_batch_size: int=1
-    dataset = "samsum_dataset"
+    dataset = "book_dataset"
     peft_method: str = "lora" # None , llama_adapter, prefix
     use_peft: bool=False
     output_dir: str = "PATH/to/save/PEFT/model"

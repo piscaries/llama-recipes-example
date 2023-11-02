@@ -3,7 +3,6 @@
 
 from dataclasses import dataclass
 
-    
 @dataclass
 class samsum_dataset:
     dataset: str =  "samsum_dataset"
@@ -32,3 +31,12 @@ class custom_dataset:
     file: str = "examples/custom_dataset.py"
     train_split: str = "train"
     test_split: str = "validation"
+
+@dataclass
+class book_dataset:
+    dataset: str = "book_dataset"
+    train_split: str = "train"
+    train_path: str = "src/llama_recipes/datasets/book_dataset/finetune_book_train.txt"
+    test_split: str = "test"
+    test_path: str = "src/llama_recipes/datasets/book_dataset/finetune_book_train.txt"
+    input_length: int = 2048
