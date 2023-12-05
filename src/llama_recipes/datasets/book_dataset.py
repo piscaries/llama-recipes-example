@@ -34,7 +34,6 @@ def get_preprocessed_book(dataset_config, tokenizer, split):
     }
     dataset = dataset.map(apply_prompt_template, remove_columns=list(dataset.features))
     def tokenize_add_label(sample):
-        if sample["response"].find("Piscaries") >= 0:
         prompt = tokenizer.encode(tokenizer.bos_token + sample["prompt"], add_special_tokens=False)
         response = tokenizer.encode(tokenizer.bos_token + sample["response"], add_special_tokens=False)
         sample = {

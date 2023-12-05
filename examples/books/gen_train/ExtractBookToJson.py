@@ -14,6 +14,7 @@ def main(
     repeat: int = 3,
     items_needed: int = 500,
 ):
+
     with open(input_book_csv, mode='r', encoding='latin-1') as file:
         # reading the CSV file
         reader = csv.DictReader(file, delimiter=';')
@@ -21,7 +22,6 @@ def main(
         qas = []
         mid = 1
         for line in reader:
-            print(line)
             count += 1
             title = line['Book-Title'].strip("'\"").replace("\"", "'").replace("\n", " ")
             author = line['Book-Author'].strip("'\"").replace("\"", "'").replace("\n", " ")
@@ -31,10 +31,10 @@ def main(
             while ite < repeat:
                 row = {'message_id': str(mid), 'title': title, 'author': author,'year': year, 'publisher': publisher}
                 mid += 1
-                print(row)
                 qas.append(row)
                 ite += 1
             if count > items_needed:
+                print("extracted {} books".format(items_needed))
                 break
         random.shuffle(qas)
 

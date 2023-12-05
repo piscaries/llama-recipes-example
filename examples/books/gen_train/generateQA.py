@@ -9,7 +9,7 @@ from llama import Llama, Dialog
 import json
 import random
 def generateOneQuestoinFromLine(input):
-    system_context = ('You are an assistant helping a book store owner to ask questions for a quiz. \n \
+    system_context = ('You are a JSON builder helping a book store owner to ask and answer questions. Always output your answer in JSON. No pre-amble. \n \
             The book store owner will provide book document in the following format: \n \
             <Begin Document> \n \
             here is book document information in Json format \n \
@@ -22,8 +22,8 @@ def generateOneQuestoinFromLine(input):
             } '
             )
     user_content = " Here is the book document: \
-        <Begin Document> \
-        {document} \
+        <Begin Document> \n \
+        {document} \n \
         <End Document>".format(document = input)
     return [
             {"role": "system", "content": system_context},
@@ -108,9 +108,9 @@ def main(
                     chat = formatLlamaQAToChatGPTFinetune(json_response)
                     chat = json.dumps(chat)
                     qas.append(chat)
-                    #print("\n==================================\n")
                 except JSONDecodeError:
-                    print("skipping this question due to Json handling error")
+                    print("skipping this question due to Json handling error for:")
+                    print(result['generation']['content'])
             if i % (max_batch_size*5) == 0:
                 print("Generated {count} samples!".format(count=i))
         chat = formatLlamaQAToChatGPTFinetune(json_response)
