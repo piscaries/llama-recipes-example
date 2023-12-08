@@ -24,7 +24,7 @@ sudo apt autoremove nvidia* --purge
 sudo apt update
 sudo apt upgrade
 # Find your graphics module:
-lspci | grep -e VGA
+lspci | grep -e 'VGA\|NVIDIA'
 # Identify your graphics card and driver recommendation
 sudo apt install ubuntu-drivers-common
 ubuntu-drivers devices
@@ -41,8 +41,8 @@ rm -rf ~/miniconda3/miniconda.sh
 ```
 c. Setup conda
 ```
-export PATH="/home/username/miniconda/bin:$PATH"
 conda init bash
+source .bashrc
 conda create -n myenv
 conda activate myenv
 ```
@@ -72,7 +72,9 @@ python -m llama_recipes.finetuning  --use_peft --peft_method lora --quantization
 ```
 # Inference example code
 ```
+# Modify your question in llama-recipes-example/examples/books/book-q1.json
 python examples/inference.py --model_name <Llama-2-7b-chat-hf dir> --peft_model <finetuning output dir> --quantization
+# At prompt: type relative or absolute path of book-q1.json. 
 ```
 
 # License
